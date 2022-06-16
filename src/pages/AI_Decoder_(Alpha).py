@@ -1,12 +1,13 @@
 # AI for decoding caesar cipher text using NLP
 import streamlit as st
-from nltk.corpus import words
+import pandas as pd
 
 
 def makes_sense(text: str):
     """tells whether the given string makes sense"""
     for word in text.split():
-        if word in words.words() and word.isalpha():
+        data = pd.read_csv("./data/words.csv")["words"]
+        if word.lower() in data.values and word.isalpha():
             return True
     return False
 
