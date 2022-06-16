@@ -1,0 +1,9 @@
+[theme]
+base="dark"
+primaryColor="#ebcb8b"
+backgroundColor="#1e293b"
+secondaryBackgroundColor="#0f172a"
+textColor="#d0d4fc"
+
+[server]
+port=8080
