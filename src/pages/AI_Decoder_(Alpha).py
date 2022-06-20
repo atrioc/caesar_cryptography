@@ -1,42 +1,52 @@
-# AI for decoding caesar cipher text using NLP
 import streamlit as st
 import pandas as pd
 
 
 def makes_sense(text: str):
     """tells whether the given string makes sense"""
-    for word in text.split():
+    for word in text.strip().split():
         data = pd.read_csv("./data/words.csv")["words"]
-        if word.lower() in data.values and word.isalpha():
+        if all([word.isalpha(), word.lower() in data.values, len(word) > 2]):
             return True
     return False
 
 
-def decoder(text: str):
+def decrypt(text: str):
+    """
+    decryptr decryptd the caesar cipher
+
+    Parameters
+    ----------
+    text : str
+        The text to be decrypted.
+
+    Returns
+    -------
+    str
+        The decrypted text.
+    """
     shift = 0
     while True:
-        # positive shift
-        decoded = ""
+        # Positive shift
+        decrypted = ""
         for char in text:
-            de_char = chr(ord(char) + shift)
-            decoded += de_char
-        if makes_sense(decoded):
-            return decoded
+            decrypted += chr(ord(char) + shift)
+        if makes_sense(decrypted):
+            return decrypted
 
         # Negative shift
-        decoded = ""
+        decrypted = ""
         for char in text:
-            de_char = chr(ord(char) - shift)
-            decoded += de_char
-        if makes_sense(decoded):
-            return decoded
+            decrypted += chr(ord(char) - shift)
+        if makes_sense(decrypted):
+            return decrypted
 
         shift += 1
 
 
-st.title("AI Decoder")
+st.title("AI decryptor")
 st.error(
-    "This is a beta version of the AI Decoder. It is not ready for production use. It only supports english for now"
+    "This is a beta version of the AI decryptor. It is not ready for production use. It only supports english decoding for now"
 )
 
 input_type = st.selectbox(
@@ -46,12 +56,15 @@ input_type = st.selectbox(
 )
 
 if input_type == "Text":
-    text = st.text_input("Enter text:", help="The text to encode.")
+    text = st.text_input("Enter text:", help="The text to encrypt.")
 else:
-    file = st.file_uploader(label="Upload a file:", help="The file to encode.")
+    file = st.file_uploader(label="Upload a file:", help="The file to encrypt.")
     if file is not None:
-        text = file.getvalue().decode("utf-8")
+        text = file.getvalue().decrypt("utf-8")
 
 
-if st.button("decode"):
-    st.success(decoder(text))
+if st.button("decrypt"):
+    if len(text.strip()) > 0:
+        st.success(decryptor(text))
+    else:
+        st.error("No text to encrypt.")

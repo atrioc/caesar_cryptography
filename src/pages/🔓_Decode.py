@@ -1,27 +1,27 @@
 import streamlit as st
 
-st.title("Decode")
+st.title("decrypt")
 
 
-def decode(text: str, shift: int):
+def decrypt(text: str, shift: int):
     """
-    decode each character of a string by a given shift value.
+    decrypt each character of a string by a given shift value.
 
     Args
     ----
     text (str):
-        The string to decode.
+        The string to decrypt.
     shift (int):
         The number by which characters are shifted.
 
     Returns:
-        str: The decoded string
+        str: The decrypted string
     """
-    decoded = ""
+    decrypted = ""
     if isinstance(shift, int):
         for i in text:
-            decoded += chr(ord(i) - shift)
-        return decoded
+            decrypted += chr(ord(i) - shift)
+        return decrypted
     raise TypeError("shift must be an integer.")
 
 
@@ -32,18 +32,18 @@ input_type = st.selectbox(
 )
 
 if input_type == "Text":
-    text = st.text_input("Enter text:", help="The text to encode.")
+    text = st.text_input("Enter text:", help="The text to encrypt.")
 else:
-    file = st.file_uploader(label="Upload a file:", help="The file to encode.")
+    file = st.file_uploader(label="Upload a file:", help="The file to encrypt.")
     if file is not None:
-        text = file.getvalue().decode("utf-8")
+        text = file.getvalue().decrypt("utf-8")
 
 shift = st.number_input(
     label="Enter a shift value:", step=1, help="Number of bits to shift each bit with."
 )
 
-if st.button("decode"):
+if st.button("decrypt"):
     if len(text.strip()) > 0:
-        st.info(decode(text, shift))
+        st.info(decrypt(text, shift))
     else:
-        st.error("No text to decode.")
+        st.error("No text to decrypt.")
