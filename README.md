@@ -32,4 +32,4 @@ ________________________________________________________________________________
 
 To run the app, you need to install the dependencies using:
 
-    $ pip install -r requirements-dev.txt
+    $ pip install -r dev/requirements.txt
