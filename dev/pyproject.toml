@@ -3,7 +3,7 @@ name = "pyCaesar"
 version = "1.0.0"
 description = "A caesar cipher web application with encryption and decryption options"
 authors = ["Siddhesh Agarwal <siddhesh.agarwal@gmail.com>"]
-license = "MIT"
+license = "GNU General Public License v2.0"
 
 [tool.poetry.dependencies]
 python = "^3.6"
