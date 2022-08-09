@@ -7,7 +7,7 @@ license = "GNU General Public License v2.0"
 
 [tool.poetry.dependencies]
 python = "3.10"
-streamlit = "1.10.0"
+streamlit = "1.10.1"
 
 [tool.poetry.dev-dependencies]
 black = "22.3.0"
